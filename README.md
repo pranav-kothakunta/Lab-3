@@ -8,8 +8,8 @@
 
 ## Student Information
 
-- **Student Name:** `Nithika Tatipally`
-- **Registration Number:** `252U1R9158`
+- **Student Name:** `pranav kothakunta`
+- **Registration Number:** `252U1R9074`
 - **Section / Batch:** `CSE GAI`
 - **Repository / Submission Date:** `06-11-2026`
 
