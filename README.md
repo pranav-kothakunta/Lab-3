@@ -610,3 +610,7 @@ git push origin main
 
 - **Deployment Status:** `Not Deployed (Local Lab Environment)`
 - **Live URL Placeholder:** `https://[your-deployment-url-here]`
+
+## Live Demo
+
+The application is deployed and can be accessed at: https://lab-3-mbsw.onrender.com
