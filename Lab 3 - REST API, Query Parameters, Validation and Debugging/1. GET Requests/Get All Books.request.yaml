@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Returns all books in default order (id ASC, limit 10, offset 0). Expected: HTTP 200"
+url: http://localhost:3000/books
+method: GET
+order: 1000

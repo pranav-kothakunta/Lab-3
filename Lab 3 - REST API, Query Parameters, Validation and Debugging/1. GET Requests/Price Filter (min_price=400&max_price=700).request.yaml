@@ -1,0 +1,8 @@
+$kind: http-request
+description: "Filters books between 400 and 700 inclusive. Expected: HTTP 200"
+url: http://localhost:3000/books?min_price=400&max_price=700
+method: GET
+queryParams:
+  min_price: "400"
+  max_price: "700"
+order: 6000

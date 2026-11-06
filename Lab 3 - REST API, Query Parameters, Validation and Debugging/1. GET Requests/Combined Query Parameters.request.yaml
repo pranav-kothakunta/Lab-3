@@ -1,0 +1,13 @@
+$kind: http-request
+description: "Combined search, sort, pagination, and price filtering. Expected: HTTP 200"
+url: http://localhost:3000/books?search_q=js&order_by=price&order=DESC&limit=5&offset=0&min_price=100&max_price=1000
+method: GET
+queryParams:
+  search_q: js
+  order_by: price
+  order: DESC
+  limit: "5"
+  offset: "0"
+  min_price: "100"
+  max_price: "1000"
+order: 7000

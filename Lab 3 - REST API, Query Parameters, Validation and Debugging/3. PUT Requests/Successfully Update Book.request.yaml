@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Updates details of book with ID 1. Expected: HTTP 200"
+url: http://localhost:3000/books/1
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "JavaScript: The Definitive Guide (Updated)",
+      "author": "David Flanagan",
+      "price": 799.00,
+      "pages": 704
+    }
+order: 1000

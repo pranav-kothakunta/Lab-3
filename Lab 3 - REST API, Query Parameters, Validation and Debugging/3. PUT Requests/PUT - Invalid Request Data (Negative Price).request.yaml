@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Validation test: Negative price on update. Expected: HTTP 400"
+url: http://localhost:3000/books/1
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Invalid Book",
+      "author": "Author",
+      "price": -50,
+      "pages": 300
+    }
+order: 4000

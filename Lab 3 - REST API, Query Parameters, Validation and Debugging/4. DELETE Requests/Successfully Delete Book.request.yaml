@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Deletes book with ID 1. Expected: HTTP 200"
+url: http://localhost:3000/books/1
+method: DELETE
+order: 1000

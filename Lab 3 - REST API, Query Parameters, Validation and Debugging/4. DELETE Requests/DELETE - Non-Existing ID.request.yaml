@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Attempts deletion on non-existent ID. Expected: HTTP 404"
+url: http://localhost:3000/books/9999
+method: DELETE
+order: 2000

@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Tests 400 Bad Request when ID is not an integer. Expected: HTTP 400"
+url: http://localhost:3000/books/abc
+method: GET
+order: 10000

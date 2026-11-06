@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Validation test: Invalid book ID. Expected: HTTP 400"
+url: http://localhost:3000/books/xyz
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Updated Book",
+      "author": "Author",
+      "price": 500,
+      "pages": 300
+    }
+order: 2000

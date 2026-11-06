@@ -1,0 +1,7 @@
+$kind: http-request
+description: "Searches books whose title contains 'JavaScript' using SQL LIKE. Expected: HTTP 200"
+url: http://localhost:3000/books?search_q=JavaScript
+method: GET
+queryParams:
+  search_q: JavaScript
+order: 2000

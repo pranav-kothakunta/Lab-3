@@ -1,0 +1,15 @@
+$kind: http-request
+description: "Validation test: Missing author. Expected: HTTP 400"
+url: http://localhost:3000/books
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "JavaScript Basics",
+      "price": 450,
+      "pages": 250
+    }
+order: 3000

@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 8a02b288-4581-4a1f-8b40-3bd0031b0ef9
+
+localResources:
+  collections:
+    - ../Lab 3 - REST API, Query Parameters, Validation and Debugging

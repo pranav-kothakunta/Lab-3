@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Validation test: Invalid book ID on delete. Expected: HTTP 400"
+url: http://localhost:3000/books/invalidId
+method: DELETE
+order: 3000

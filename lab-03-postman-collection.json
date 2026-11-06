@@ -1,0 +1,541 @@
+{
+  "info": {
+    "_postman_id": "bdf-lab-03-collection-id",
+    "name": "Lab 3 - REST API, Query Parameters, Validation and Debugging",
+    "description": "Postman Collection for testing all GET, POST, PUT, and DELETE endpoints with query params, validation checks, and error cases.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET Requests",
+      "item": [
+        {
+          "name": "Get All Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Returns all books in default order (id ASC, limit 10, offset 0). Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search Books (search_q=JavaScript)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books?search_q=JavaScript",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "search_q",
+                  "value": "JavaScript"
+                }
+              ]
+            },
+            "description": "Searches books whose title contains 'JavaScript' using SQL LIKE. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Sort Books Ascending (order_by=price&order=ASC)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books?order_by=price&order=ASC",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "order_by",
+                  "value": "price"
+                },
+                {
+                  "key": "order",
+                  "value": "ASC"
+                }
+              ]
+            },
+            "description": "Sorts books by price ascending. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Sort Books Descending (order_by=price&order=DESC)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books?order_by=price&order=DESC",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "order_by",
+                  "value": "price"
+                },
+                {
+                  "key": "order",
+                  "value": "DESC"
+                }
+              ]
+            },
+            "description": "Sorts books by price descending. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Pagination (limit=2&offset=2)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books?limit=2&offset=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "2"
+                },
+                {
+                  "key": "offset",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Returns 2 books, skipping the first 2. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Price Filter (min_price=400&max_price=700)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books?min_price=400&max_price=700",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "min_price",
+                  "value": "400"
+                },
+                {
+                  "key": "max_price",
+                  "value": "700"
+                }
+              ]
+            },
+            "description": "Filters books between 400 and 700 inclusive. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Combined Query Parameters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books?search_q=js&order_by=price&order=DESC&limit=5&offset=0&min_price=100&max_price=1000",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"],
+              "query": [
+                {
+                  "key": "search_q",
+                  "value": "js"
+                },
+                {
+                  "key": "order_by",
+                  "value": "price"
+                },
+                {
+                  "key": "order",
+                  "value": "DESC"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "min_price",
+                  "value": "100"
+                },
+                {
+                  "key": "max_price",
+                  "value": "1000"
+                }
+              ]
+            },
+            "description": "Combined search, sort, pagination, and price filtering. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get Book by Valid ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "1"]
+            },
+            "description": "Retrieves the book with ID 1. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get Book by Non-Existing ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books/9999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "9999"]
+            },
+            "description": "Tests 404 Not Found response when book ID does not exist. Expected: HTTP 404"
+          }
+        },
+        {
+          "name": "Get Book by Invalid ID (String)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books/abc",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "abc"]
+            },
+            "description": "Tests 400 Bad Request when ID is not an integer. Expected: HTTP 400"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. POST Requests",
+      "item": [
+        {
+          "name": "Successfully Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"JavaScript Basics\",\n  \"author\": \"John\",\n  \"price\": 450,\n  \"pages\": 250\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Creates a new book. Expected: HTTP 201"
+          }
+        },
+        {
+          "name": "POST - Missing Title",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"author\": \"John\",\n  \"price\": 450,\n  \"pages\": 250\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Validation test: Missing title. Expected: HTTP 400"
+          }
+        },
+        {
+          "name": "POST - Missing Author",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"JavaScript Basics\",\n  \"price\": 450,\n  \"pages\": 250\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Validation test: Missing author. Expected: HTTP 400"
+          }
+        },
+        {
+          "name": "POST - Missing Price",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"JavaScript Basics\",\n  \"author\": \"John\",\n  \"pages\": 250\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Validation test: Missing price. Expected: HTTP 400"
+          }
+        },
+        {
+          "name": "POST - Non-Numeric Price",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"JavaScript Basics\",\n  \"author\": \"John\",\n  \"price\": \"free\",\n  \"pages\": 250\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Validation test: Price is non-numeric string. Expected: HTTP 400"
+          }
+        },
+        {
+          "name": "POST - Empty Title and Author",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"   \",\n  \"author\": \"   \",\n  \"price\": 450,\n  \"pages\": 250\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books"]
+            },
+            "description": "Validation test: Whitespace-only title. Expected: HTTP 400"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. PUT Requests",
+      "item": [
+        {
+          "name": "Successfully Update Book",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"JavaScript: The Definitive Guide (Updated)\",\n  \"author\": \"David Flanagan\",\n  \"price\": 799.00,\n  \"pages\": 704\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "1"]
+            },
+            "description": "Updates details of book with ID 1. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "PUT - Invalid ID (String)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Book\",\n  \"author\": \"Author\",\n  \"price\": 500,\n  \"pages\": 300\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books/xyz",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "xyz"]
+            },
+            "description": "Validation test: Invalid book ID. Expected: HTTP 400"
+          }
+        },
+        {
+          "name": "PUT - Non-Existing ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Ghost Book\",\n  \"author\": \"Unknown\",\n  \"price\": 500,\n  \"pages\": 300\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books/9999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "9999"]
+            },
+            "description": "Attempts update on non-existent ID. Expected: HTTP 404"
+          }
+        },
+        {
+          "name": "PUT - Invalid Request Data (Negative Price)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Invalid Book\",\n  \"author\": \"Author\",\n  \"price\": -50,\n  \"pages\": 300\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/books/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "1"]
+            },
+            "description": "Validation test: Negative price on update. Expected: HTTP 400"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. DELETE Requests",
+      "item": [
+        {
+          "name": "Successfully Delete Book",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "1"]
+            },
+            "description": "Deletes book with ID 1. Expected: HTTP 200"
+          }
+        },
+        {
+          "name": "DELETE - Non-Existing ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books/9999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "9999"]
+            },
+            "description": "Attempts deletion on non-existent ID. Expected: HTTP 404"
+          }
+        },
+        {
+          "name": "DELETE - Invalid ID (String)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/books/invalidId",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["books", "invalidId"]
+            },
+            "description": "Validation test: Invalid book ID on delete. Expected: HTTP 400"
+          }
+        }
+      ]
+    }
+  ]
+}

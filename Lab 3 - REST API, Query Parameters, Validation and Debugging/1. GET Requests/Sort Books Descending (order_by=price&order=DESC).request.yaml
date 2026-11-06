@@ -1,0 +1,8 @@
+$kind: http-request
+description: "Sorts books by price descending. Expected: HTTP 200"
+url: http://localhost:3000/books?order_by=price&order=DESC
+method: GET
+queryParams:
+  order_by: price
+  order: DESC
+order: 4000

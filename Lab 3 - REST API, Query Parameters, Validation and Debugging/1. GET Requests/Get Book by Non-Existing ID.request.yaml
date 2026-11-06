@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Tests 404 Not Found response when book ID does not exist. Expected: HTTP 404"
+url: http://localhost:3000/books/9999
+method: GET
+order: 9000

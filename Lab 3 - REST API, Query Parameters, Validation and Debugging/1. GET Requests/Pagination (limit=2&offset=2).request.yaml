@@ -1,0 +1,8 @@
+$kind: http-request
+description: "Returns 2 books, skipping the first 2. Expected: HTTP 200"
+url: http://localhost:3000/books?limit=2&offset=2
+method: GET
+queryParams:
+  limit: "2"
+  offset: "2"
+order: 5000

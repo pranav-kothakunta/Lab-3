@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Validation test: Price is non-numeric string. Expected: HTTP 400"
+url: http://localhost:3000/books
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "JavaScript Basics",
+      "author": "John",
+      "price": "free",
+      "pages": 250
+    }
+order: 5000
